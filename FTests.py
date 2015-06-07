@@ -280,25 +280,3 @@ def test_10_DelStud_NO():
     resp = ConnectToServer.getresponce()
     assert resp.status == 302
     assert get_studs_count(ConnectToDB) == 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
