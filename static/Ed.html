@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>StudManager</title>
+</head>
+<body>
+{% block body %}
+<a href="/"><button>Main page</button></a>
+{% for s in stud %}
+    <form action="{{ s[8] }}" method="post">
+            <input type="text" name="name" value= "{{ s[1] }}">* Name (2-30) symbols + " " "-" ".")<br>
+            <input type="text" name="surname" value="{{ s[0] }}">* Surname (2-50 symbols + " " "-" ".")<br>
+            <input type="text" name="group_id" value="{{ s[7] }}">* Group ID (100, 101, .., 111) <br>
+            <input type="radio" name="sex" value="F">Male
+            <input type="radio" name="sex" value="M">Female     * Sex<br>
+            <input type="text" name="birthday" value="{{ s[3] }}">* Birthday (YYYY-MM-DD)<br>
+            <input type="text" name="address" value="{{ s[5] }}">Address (1-50 symbols and ",", ".", ";", "-", " ") <br>
+            <input type="text" name="nationality" value="{{ s[4] }}">Nationality (2-20 symbols + " " "-" ".") <br>
+        <input type="submit" name="confirm" value="edit">
+        <br><br>{{ s[2] }}
+    </form>
+{% end %}
+{% end %}
+
+
+</body>
+</html>
