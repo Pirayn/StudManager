@@ -6,8 +6,8 @@
     <title></title>
 </head>
 <body>
-    <a href="/"><button>Main page</button></a>
-    <a href="/add"><button>Add student</button></a>
+    <a href="/" id="ToMainPageButton"><button>Main page</button></a>
+    <a href="/add" id="ToAddPageButton"><button>Add student</button></a>
     {% if not nostud %}
         <p>No students yet</p>
     {% else %}
@@ -40,5 +40,18 @@
             {% end %}
         </table>
     {% end %}
+    <br><br><br>
+    <form action="add" method="post">
+            <input type="text" name="name" id="InputName">* Name (2-30) symbols + " " "-" ".")<br>
+            <input type="text" name="surname" id="InputSurname">* Surname (2-50 symbols + " " "-" ".")<br>
+            <input type="text" name="group_id" id="InputGroup">* Group ID (0 ... 999999999) <br>
+            <input type="text" name="mark" id="InputMark">* Mark (2.0 ... 5.0)<br>
+            <input type="radio" name="sex" value="M" id="InputSexM">Male
+            <input type="radio" name="sex" value="F" id="InputSexF">Female     * Sex<br>
+            <input type="text" name="birthday" id="InputBithday">* Birthday (YYYY-MM-DD)<br>
+            <input type="text" name="address" id="InputAddress">Address (1-50 symbols and ",", ".", ";", "-", " ") <br>
+            <input type="text" name="nationality" id="InputNationality">Nationality (2-20 symbols + " " "-" ".") <br>
+        <input type="submit" name="add" value="Add">
+    </form>
 </body>
 </html>

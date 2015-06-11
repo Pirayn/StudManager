@@ -3,16 +3,38 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import os
 
+def TestBro1():
+    ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
+    os.environ["webdriver.chrome.driver"] = ChromeDriver
+    driver = webdriver.Chrome(ChromeDriver)
+    driver.get("http://localhost:8080/")
+    assert "Python" in driver.title
+    bro = "диб"
+    assert bro is "диб"
+    elem = driver.find_element_by_id("q11")
+    assert bro is "диб"
+    elem = driver.find_element_by_id("q1")
 
-ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
-os.environ["webdriver.chrome.driver"] = ChromeDriver
 
-driver = webdriver.Chrome(ChromeDriver)
+def TestBro2():
+    ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
+    os.environ["webdriver.chrome.driver"] = ChromeDriver
+    driver = webdriver.Chrome(ChromeDriver)
+    driver.get("http://localhost:8080/")
+    assert "Python" in driver.title
+    bro = "диб"
+    assert bro is "диб"
+    elem = driver.find_element_by_id("q2")
 
-driver.get("http://www.python.org")
-assert "Python" in driver.title
-elem = driver.find_element_by_name("q")
-elem.send_keys("pycon")
-elem.send_keys(Keys.RETURN)
-assert "No results found." not in driver.page_source
-driver.close()
+
+def TestBro3():
+    ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
+    os.environ["webdriver.chrome.driver"] = ChromeDriver
+    driver = webdriver.Chrome(ChromeDriver)
+    driver.get("http://localhost:8080/")
+    assert "Python" in driver.title
+    bro = "диб"
+    assert bro is "диб"
+    elem = driver.find_element_by_id("q3")
+    assert bro is "диб"
+
