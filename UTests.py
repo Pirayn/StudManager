@@ -75,4 +75,4 @@ def test_13_Mark_P(znach):
 
 @pytest.mark.parametrize("znach", ["1.99", "", "4,44",	"5.01", "2.123", u"Пять", "010101"])
 def test_14_Mark_N(znach):
-    assert ParrentHandler.check_mark(znach) is False
+    assert ParrentHandler.check_mark(znach) is Falsels

@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import os
 
-def TestBro1():
+def TestAddButtonError():
     ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
     os.environ["webdriver.chrome.driver"] = ChromeDriver
     driver = webdriver.Chrome(ChromeDriver)
@@ -11,12 +11,12 @@ def TestBro1():
     assert "Python" in driver.title
     bro = "диб"
     assert bro is "диб"
-    elem = driver.find_element_by_id("q11")
+    elem = driver.find_element_by_id("InputMark")
+    elem = driver.find_element_by_id("InputName")
     assert bro is "диб"
-    elem = driver.find_element_by_id("q1")
 
 
-def TestBro2():
+def TestNameField():
     ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
     os.environ["webdriver.chrome.driver"] = ChromeDriver
     driver = webdriver.Chrome(ChromeDriver)
@@ -24,10 +24,10 @@ def TestBro2():
     assert "Python" in driver.title
     bro = "диб"
     assert bro is "диб"
-    elem = driver.find_element_by_id("q2")
+    elem = driver.find_element_by_id("AddButton")
 
 
-def TestBro3():
+def Test():
     ChromeDriver = "/Users/artem/Desktop/StudManager/tests/chromedriver"
     os.environ["webdriver.chrome.driver"] = ChromeDriver
     driver = webdriver.Chrome(ChromeDriver)

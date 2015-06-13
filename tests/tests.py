@@ -10,11 +10,22 @@ class PageElementFinder(object):
     """Visual elements finder"""
     def __init__(self):
         self.TotalElementList = []
+        self.BaseUrl = ''
+        self.IncludeLvl = 0
 
     def FindElementsById(self, PageUrl, ParsedBody):
         """Returns list of elements from current page"""
         try:
             FreshElementList = map(lambda element_id: PageUrl+element_id, ParsedBody.xpath('//@id'))
+            self.TotalElementList += FreshElementList
+            return FreshElementList
+        except:
+            return "Error! Smth wrong with parsed body"
+
+    def FindElementsByClass(self, PageUrl, ParsedBody):
+        """Returns list of elements from current page"""
+        try:
+            FreshElementList = map(lambda element_id: PageUrl+element_id, ParsedBody.xpath('//@class'))
             self.TotalElementList += FreshElementList
             return FreshElementList
         except:
@@ -50,6 +61,7 @@ class TestParser(object):
         self.AverageAssertsPerTest = 0
         self.AverageAssertsPerElement = 0
         self.ElementsUnderCoverageCount = 0
+        self.AverageTestsPerElement = 0
         self.TestsCount = 0
 
     def ParseTest(self, filename):
@@ -83,6 +95,7 @@ class TestParser(object):
                     i.remove(j)
                 i.remove(i[2])
             self.ParsedTestList = ParsedTestList
+            self.TestsCount = len(ParsedTestList)
             return self.ParsedTestList
         except:
             return "Error! Check check ur tests file!"
@@ -93,8 +106,9 @@ class TestParser(object):
             for j in i[2:]:
                 if j not in self.TotalElemtList:
                     self.TotalElemtList.append(j)
-        self.TestsCount = len(self.TotalElemtList)
-        self.TotalElementsCount = len(self.ParsedTestList[2:])
+        self.TestsCount = len(self.ParsedTestList)
+        self.TotalElementsCount = len(self.TotalElemtList)
+        self.AverageTestsPerElement = self.TestsCount / self.TotalElementsCount
         return self.TotalElemtList
 
     def GetAssertsCount(self):
@@ -105,11 +119,39 @@ class TestParser(object):
         self.AverageAssertsPerTest = self.TotalAssertsCount / self.TestsCount
 
 
+class Comparer(object):
+    def __init__(self):
+        pass
+
+    def GetElementsUnderCover(self, listfromtests, listfrompage):
+
+        pass
+
+    def GetElementsWithoutCover(self, listfromtests, listfrompage):
+        pass
+
+    def Compare(self, filename, url, includelvl):
+        PageElements = PageElementFinder()
+
+        TestElements = TestParser()
+
+        pass
 
 tef = TestParser()
 tef.ParseTest(filename)
-print tef.ParsedTestList
-print tef.GetElementList()
+tef.GetElementList()
+tef.GetAssertsCount()
+pef = PageElementFinder()
+
+print 'Total tests count: ', tef.TestsCount
+print 'ParsedTestlist: ', tef.ParsedTestList
+print 'TotalElementList: ', tef.TotalElemtList
+print 'TotalAssertsCount: ', tef.TotalAssertsCount
+print 'TotalElementsCount: ', tef.TotalElementsCount
+print 'AverageAssertsPerTest: ', tef.AverageAssertsPerTest
+print 'AssertsPerElement: ', tef.AverageAssertsPerElement
+print 'AverageTestsPerElement', tef.AverageTestsPerElement
+
 
 
 
