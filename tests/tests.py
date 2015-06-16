@@ -2,7 +2,7 @@ import requests
 from lxml import html
 
 
-STARTING_URL = 'http://localshost:8080/'
+STARTING_URL = 'http://localhost:8080/'
 filename = "frontTests.py"
 
 
@@ -142,7 +142,16 @@ tef.ParseTest(filename)
 tef.GetElementList()
 tef.GetAssertsCount()
 pef = PageElementFinder()
+s = pef.GetParsedBodyByUrl(STARTING_URL)
+print 'azaza', s
+d = pef.FindElementsById(STARTING_URL, s)
+elementsBezTestov = []
+for i in d:
+    if i not in tef.TotalElemtList:
+        elementsBezTestov.append(i)
 
+
+"""
 print 'Total tests count: ', tef.TestsCount
 print 'ParsedTestlist: ', tef.ParsedTestList
 print 'TotalElementList: ', tef.TotalElemtList
@@ -151,8 +160,31 @@ print 'TotalElementsCount: ', tef.TotalElementsCount
 print 'AverageAssertsPerTest: ', tef.AverageAssertsPerTest
 print 'AssertsPerElement: ', tef.AverageAssertsPerElement
 print 'AverageTestsPerElement', tef.AverageTestsPerElement
+"""
+a = (len(pef.TotalElementList))
+b = (len(elementsBezTestov))
+max = 0
+min = len(tef.ParsedTestList[1])
+kol = 0
+sum = 0
 
 
+print 'elements on page: ', a
+print 'bez testov: ', b, ' shtuk ', elementsBezTestov
+print 'test coverage: ', 100-float(b)/float(a)*100, '%'
+
+for i in tef.ParsedTestList:
+    dl = len(i[2:])
+    kol += 1
+    sum += dl
+    if max < dl:
+        max = dl
+    if min > dl:
+        min = dl
+
+print 'max: ', max
+print 'min', min
+print 'avg: ', float(sum)/float(kol)
 
 
 
