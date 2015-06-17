@@ -121,7 +121,20 @@ class TestParser(object):
 
 class Comparer(object):
     def __init__(self):
-        pass
+        self.elementsBezTestov = []
+        self.elements = []
+        self.result = []
+        self.tef = TestParser()
+        self.tef.ParseTest(filename)
+        self.tef.GetElementList()
+        self.tef.GetAssertsCount()
+        pef = PageElementFinder()
+        s = pef.GetParsedBodyByUrl(STARTING_URL)
+        d = pef.FindElementsById(STARTING_URL, s)
+        for i in d:
+            if i not in self.tef.TotalElemtList:
+                self.elementsBezTestov.append(i)
+        self.elements = d
 
     def GetElementsUnderCover(self, listfromtests, listfrompage):
 
@@ -130,13 +143,39 @@ class Comparer(object):
     def GetElementsWithoutCover(self, listfromtests, listfrompage):
         pass
 
-    def Compare(self, filename, url, includelvl):
-        PageElements = PageElementFinder()
+    def Compare(self):
+        a = (len(self.elements))
+        b = (len(self.elementsBezTestov))
+        max = 0
+        min = len(self.tef.ParsedTestList[1])
+        kol = 0
+        sum = 0
+        a1 =  'elements on page: '+ str(a)
+        a2 =  'bez testov: '+ str(b)+ ' shtuk '+ str(self.elementsBezTestov)
+        a3 = 'test coverage: '+ str(100-float(b)/float(a)*100)+ '%'
+        for i in self.tef.ParsedTestList:
+            dl = len(i[2:])
+            kol += 1
+            sum += dl
+            if max < dl:
+                max = dl
+            if min > dl:
+                min = dl
+        a5 = 'max: '+str(max)
+        a6 = 'min: ' + str(min)
+        a7 = 'avg: ' + str(float(sum)/float(kol))
+        self.result = [a1, a2, a3, a5, a6, a7]
 
-        TestElements = TestParser()
+comp  = Comparer()
+comp.Compare()
+print comp.result[0]
+print comp.result[1]
+print comp.result[2]
+print comp.result[3]
+print comp.result[4]
+print comp.result[5]
 
-        pass
-
+"""
 tef = TestParser()
 tef.ParseTest(filename)
 tef.GetElementList()
@@ -151,7 +190,7 @@ for i in d:
         elementsBezTestov.append(i)
 
 
-"""
+
 print 'Total tests count: ', tef.TestsCount
 print 'ParsedTestlist: ', tef.ParsedTestList
 print 'TotalElementList: ', tef.TotalElemtList
@@ -160,7 +199,7 @@ print 'TotalElementsCount: ', tef.TotalElementsCount
 print 'AverageAssertsPerTest: ', tef.AverageAssertsPerTest
 print 'AssertsPerElement: ', tef.AverageAssertsPerElement
 print 'AverageTestsPerElement', tef.AverageTestsPerElement
-"""
+
 a = (len(pef.TotalElementList))
 b = (len(elementsBezTestov))
 max = 0
@@ -186,5 +225,5 @@ print 'max: ', max
 print 'min', min
 print 'avg: ', float(sum)/float(kol)
 
-
+"""
 

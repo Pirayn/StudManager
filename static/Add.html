@@ -9,17 +9,17 @@
 {% block body %}
 <a href="/"><button>Main page</button></a>
     <form action="add" method="post">
-            <input type="text" name="name">* Name (2-30) symbols + " " "-" ".")<br>
-            <input type="text" name="surname">* Surname (2-50 symbols + " " "-" ".")<br>
-            <input type="text" name="group_id">* Group ID (0 ... 999999999) <br>
-            <input type="text" name="mark">* Mark (2.0 ... 5.0)<br>
-            <input type="radio" name="sex" value="M">Male
-            <input type="radio" name="sex" value="F">Female     * Sex<br>
-            <input type="text" name="birthday">* Birthday (YYYY-MM-DD)<br>
-            <input type="text" name="address">Address (1-50 symbols and ",", ".", ";", "-", " ") <br>
-            <input type="text" name="nationality">Nationality (2-20 symbols + " " "-" ".") <br>
-        <input type="submit" name="add" value="Add">
-    </form>	
+            <input type="text" name="name" id="InputNameAF">* Name (2-30) symbols + " " "-" ".")<br>
+            <input type="text" name="surname" id="InputSurnameAF">* Surname (2-50 symbols + " " "-" ".")<br>
+            <input type="text" name="group_id" id="InputGroupAF">* Group ID (0 ... 999999999) <br>
+            <input type="text" name="mark" id="InputMarkAF">* Mark (2.0 ... 5.0)<br>
+            <input type="radio" name="sex" value="M" id="InputSexMAF">Male
+            <input type="radio" name="sex" value="F" id="InputSexFAF">Female     * Sex<br>
+            <input type="text" name="birthday" id="InputBithdayAF">* Birthday (YYYY-MM-DD)<br>
+            <input type="text" name="address" id="InputAddressAF">Address (1-50 symbols and ",", ".", ";", "-", " ") <br>
+            <input type="text" name="nationality" id="InputNationalityAF">Nationality (2-20 symbols + " " "-" ".") <br>
+        <input type="submit" name="add" value="Add" id="AddButtonAF">
+    </form>
 {% end %}
 </body>
 </html>
