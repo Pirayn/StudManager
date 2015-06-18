@@ -230,7 +230,7 @@ class ShowHandler(ParrentHandler):
 
     def post(self):
         self.write('Functional for post requests is not yet implemented')
-
+"""
 class Covetrics(tornado.web.RequestHandler):
     def get(self):
         comp  = Comparer()
@@ -240,14 +240,14 @@ class Covetrics(tornado.web.RequestHandler):
 
     def pos(self):
         self.write('Functional for pos requests is not yet implemented')
-
+"""
 
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/add", AddHandler),
     (r"/delete/(\d+)", DelHandler),
     (r"/edit/(\d+)", EdHandler),
-    (r"/covetrics/", Covetrics),
+   # (r"/covetrics/", Covetrics),
     ])
 
 if __name__ == "__main__":
