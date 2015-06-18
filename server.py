@@ -5,7 +5,6 @@ import MySQLdb
 import time
 from SM_Core.config import config
 import re
-from tests.tests import Comparer
 
 
 class ParrentHandler(tornado.web.RequestHandler):
@@ -212,8 +211,6 @@ class EdHandler(ParrentHandler):
             errors += 'Error address! '
         if not self.check_nationality(nationality):
             errors += 'Error nation! '
-
-
         if errors == 'ERRORS LIST: ':
             self.edit_student(name, surname,  group, sex, birthday, address, nationality, id_stud)
             self.redirect("/")
@@ -230,24 +227,13 @@ class ShowHandler(ParrentHandler):
 
     def post(self):
         self.write('Functional for post requests is not yet implemented')
-"""
-class Covetrics(tornado.web.RequestHandler):
-    def get(self):
-        comp  = Comparer()
-        comp.Compare()
-        self.render("static/covetrics.html", a0=comp.result[0], a1=comp.result[1],
-                    a2=comp.result[2], a3=comp.result[3], a4=comp.result[4], a5=comp.result[5],)
 
-    def pos(self):
-        self.write('Functional for pos requests is not yet implemented')
-"""
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-    (r"/add", AddHandler),
+    (r"/add/", AddHandler),
     (r"/delete/(\d+)", DelHandler),
     (r"/edit/(\d+)", EdHandler),
-   # (r"/covetrics/", Covetrics),
     ])
 
 if __name__ == "__main__":
