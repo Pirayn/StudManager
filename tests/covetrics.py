@@ -81,7 +81,7 @@ class Comparer(object):
 
     def Compare(self, AppElements, TestsElemets, ParsedTests):
         self.UncoveredElements = list(set(AppElements)-set(TestsElemets))
-
+"""
 pageEls = PageElementFinder()
 pageEls.GetUrlList(STARTING_URL, 2)
 pageEls.FindElements()
@@ -94,3 +94,4 @@ for s in pageEls.TotalElementList:
 print comp.UncoveredElements
 
 
+"""
