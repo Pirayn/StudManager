@@ -4,7 +4,7 @@ from lxml import html
 
 
 STARTING_URL = 'http://localhost:8080/'
-filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
+#filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
 
 
 class PageElementFinder(object):
@@ -81,17 +81,18 @@ class Comparer(object):
 
     def Compare(self, AppElements, TestsElemets, ParsedTests):
         self.UncoveredElements = list(set(AppElements)-set(TestsElemets))
-"""
-pageEls = PageElementFinder()
-pageEls.GetUrlList(STARTING_URL, 2)
-pageEls.FindElements()
-testEls = TestParser()
-testEls.ParseTests(filename)
-comp = Comparer()
-comp.Compare(pageEls.TotalElementList, testEls.TotalElemetList, testEls.ParsedTestList)
-for s in pageEls.TotalElementList:
-    print s
-print comp.UncoveredElements
+
+#pageEls = PageElementFinder()
+#pageEls.GetUrlList(STARTING_URL, 2)
+#pageEls.FindElements()
+#print pageEls.TotalElementList
+#testEls = TestParser()
+#testEls.ParseTests(filename)
+#comp = Comparer()
+#comp.Compare(pageEls.TotalElementList, testEls.TotalElemetList, testEls.ParsedTestList)
+#for s in pageEls.TotalElementList:
+#    print s
+#print comp.UncoveredElements
 
 
-"""
+

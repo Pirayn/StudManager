@@ -3,9 +3,11 @@ import tornado.ioloop
 import tornado.web
 import MySQLdb
 import time
+import requests
 from SM_Core.config import config
 import re
 from tests import covetrics
+import urllib2
 import os
 
 
@@ -232,10 +234,38 @@ class ShowHandler(ParrentHandler):
 
 class CovHandler(ParrentHandler):
     def get(self):
+        BaseUrl = "http://artdyachkov.fvds.ru:8080/"
+        response = requests.get(BaseUrl)
+        print response.content
         self.render("static/covetrics.html")
 
     def post(self):
-        self.write('Functional is not yet implemented')
+        try:
+            file =self.request.files[self.get_argument('filename')][0]
+            filename = file['filename']
+        except:
+            filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
+        BaseUrl = self.get_argument("BaseUrl")
+        BaseUrl = "http://artdyachkov.fvds.ru:8080/"
+        tests = covetrics.TestParser()
+        tests.ParseTests(filename)
+        """
+        page = covetrics.PageElementFinder()
+        page.GetUrlList(BaseUrl, 2)
+        page.FindElements()
+"""
+        pageEls = covetrics.PageElementFinder()
+        print "ok"
+        pageEls.GetUrlList(BaseUrl, 1)
+        print pageEls.UrlList[0]
+        response = urllib2.Request(pageEls.UrlList[0])
+        print response.headers
+        pageEls.FindElements()
+        print "ok2"
+        print pageEls.TotalElementList
+        response = requests.get(BaseUrl)
+
+        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=pageEls.TotalElementList)
 
 
 application = tornado.web.Application([
@@ -244,6 +274,7 @@ application = tornado.web.Application([
     (r"/delete/(\d+)", DelHandler),
     (r"/edit/(\d+)", EdHandler),
     (r"/cov/", CovHandler),
+    (r"/cov/covrep", CovHandler),
     (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': "/static/"}),
 
     ])

@@ -75,7 +75,7 @@ $('#file').change(function(){
 </head>
 <body bgcolor="#f5e79e">
 
-
+<form action="covrep" method="post">
 <div class="outer">
   <h1 style="{margin-left:500px}">Covetrics</h1>
   <div class="upload_button_outer clearfix">
@@ -83,14 +83,14 @@ $('#file').change(function(){
     <div class="uploadbtn">
       <div class="upload">&nbsp;</div>
         <span class="tooltip-content">You can easily navigate the city by car.</span>
-      <input type="file" id="file" onchange="filename()" />
+      <input name="filename" type="file" id="file" onchange="filename()" />
     </div>
   </div>
-    <input type="text" class="uploadbtn" style="font-size: 20px; margin: 20px; width: 570px; padding-left: 18px"/>
-    <input type="button" class="button4" value="Make Magic!">
+    <input type="text" value="http://localhost:8080/" name="BaseUrl" class="uploadbtn" style="font-size: 20px; margin: 20px; width: 570px; padding-left: 18px"/>
+    <input type="submit" name="covrep" class="button4" value="Make Magic!">
 </div>
 
-
+</form>
 
 
 </body>
