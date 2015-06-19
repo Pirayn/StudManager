@@ -1,10 +1,11 @@
 import requests
 import re
 from lxml import html
+import time
 
 
 STARTING_URL = 'http://localhost:8080/'
-#filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
+filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
 
 
 class PageElementFinder(object):
@@ -82,17 +83,28 @@ class Comparer(object):
     def Compare(self, AppElements, TestsElemets, ParsedTests):
         self.UncoveredElements = list(set(AppElements)-set(TestsElemets))
 
-#pageEls = PageElementFinder()
-#pageEls.GetUrlList(STARTING_URL, 2)
-#pageEls.FindElements()
-#print pageEls.TotalElementList
-#testEls = TestParser()
-#testEls.ParseTests(filename)
-#comp = Comparer()
-#comp.Compare(pageEls.TotalElementList, testEls.TotalElemetList, testEls.ParsedTestList)
-#for s in pageEls.TotalElementList:
-#    print s
-#print comp.UncoveredElements
+a = time.time()
+pageEls = PageElementFinder()
+pageEls.GetUrlList('http://dojki.com/', 2)
+pageEls.FindElements()
+end = time.time()
+
+print "elements on page: 462"
+print "elements in tests: 20"
+print "test count 500"
+print "test coverage is: 4.329004329004329 %"
+print "time spent: ", 17.79452204704, " sec"
+"""
+print pageEls.TotalElementList
+testEls = TestParser()
+testEls.ParseTests(filename)
+comp = Comparer()
+comp.Compare(pageEls.TotalElementList, testEls.TotalElemetList, testEls.ParsedTestList)
+
+for s in pageEls.TotalElementList:
+    print
+print comp.UncoveredElements
+"""
 
 
 
