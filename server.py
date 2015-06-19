@@ -5,6 +5,8 @@ import MySQLdb
 import time
 from SM_Core.config import config
 import re
+from tests import covetrics
+import os
 
 
 class ParrentHandler(tornado.web.RequestHandler):
@@ -228,12 +230,22 @@ class ShowHandler(ParrentHandler):
     def post(self):
         self.write('Functional for post requests is not yet implemented')
 
+class CovHandler(ParrentHandler):
+    def get(self):
+        self.render("static/covetrics.html")
+
+    def post(self):
+        self.write('Functional is not yet implemented')
+
 
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/add/", AddHandler),
     (r"/delete/(\d+)", DelHandler),
     (r"/edit/(\d+)", EdHandler),
+    (r"/cov/", CovHandler),
+    (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': "/static/"}),
+
     ])
 
 if __name__ == "__main__":

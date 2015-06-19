@@ -3,8 +3,8 @@ import re
 from lxml import html
 
 
-STARTING_URL = 'http://localhost:8080/'
-filename = "frontTests.py"
+STARTING_URL = 'http://82.146.52.84:8080/'
+filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
 
 
 class PageElementFinder(object):
@@ -32,7 +32,7 @@ class PageElementFinder(object):
         """Return list of all GET urls up to IncludeLevel (0 for full search)"""
         try:
             IncludeLevel -= 1
-            self.UrlList = [BaseUrl, 'http://localhost:8080/add/']
+            self.UrlList = [BaseUrl, 'http://82.146.52.84:8080/add/']
             if IncludeLevel == 0:
                 return self.UrlList
             else:
@@ -87,5 +87,10 @@ pageEls.GetUrlList(STARTING_URL, 2)
 pageEls.FindElements()
 testEls = TestParser()
 testEls.ParseTests(filename)
+comp = Comparer()
+comp.Compare(pageEls.TotalElementList, testEls.TotalElemetList, testEls.ParsedTestList)
+for s in pageEls.TotalElementList:
+    print s
+print comp.UncoveredElements
 
 
