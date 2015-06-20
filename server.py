@@ -10,6 +10,7 @@ from tests import covetrics
 import urllib2
 import os
 
+BaseUrl = "http://artdyachkov.fvds.ru:8080/"
 
 class ParrentHandler(tornado.web.RequestHandler):
     db_instance = None
@@ -234,10 +235,11 @@ class ShowHandler(ParrentHandler):
 
 class CovHandler(ParrentHandler):
     def get(self):
-        BaseUrl = "http://artdyachkov.fvds.ru:8080/"
-        response = requests.get(BaseUrl)
-        print response.content
         self.render("static/covetrics.html")
+        page = covetrics.PageElementFinder()
+        page.GetUrlList(BaseUrl, 2)
+        page.FindElements()
+        self.AppElementList = page.TotalElementList
 
     def post(self):
         try:
@@ -249,11 +251,6 @@ class CovHandler(ParrentHandler):
         BaseUrl = "http://artdyachkov.fvds.ru:8080/"
         tests = covetrics.TestParser()
         tests.ParseTests(filename)
-        """
-        page = covetrics.PageElementFinder()
-        page.GetUrlList(BaseUrl, 2)
-        page.FindElements()
-"""
         pageEls = covetrics.PageElementFinder()
         print "ok"
         pageEls.GetUrlList(BaseUrl, 1)
@@ -265,7 +262,7 @@ class CovHandler(ParrentHandler):
         print pageEls.TotalElementList
         response = requests.get(BaseUrl)
 
-        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=pageEls.TotalElementList)
+        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=self.AppElementList)
 
 
 application = tornado.web.Application([

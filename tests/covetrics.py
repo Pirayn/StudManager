@@ -33,7 +33,7 @@ class PageElementFinder(object):
         """Return list of all GET urls up to IncludeLevel (0 for full search)"""
         try:
             IncludeLevel -= 1
-            self.UrlList = [BaseUrl, 'http://localhost:8080/add/']
+            self.UrlList = [BaseUrl, 'http://artdyachkov.fvds.ru:8080/add/']
             if IncludeLevel == 0:
                 return self.UrlList
             else:
