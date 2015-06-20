@@ -5,7 +5,7 @@ import os
 class GenericConfig(object):
     def __init__(self):
         self.dbuser = 'root'
-        self.dbpasswd = 'aswedro'
+        self.dbpasswd = ''
         self.db = 'STUDENTS'
         self.dbhost = '127.0.0.1'
         self.dbport = 3306

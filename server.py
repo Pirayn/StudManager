@@ -233,13 +233,15 @@ class ShowHandler(ParrentHandler):
     def post(self):
         self.write('Functional for post requests is not yet implemented')
 
+AppElementList = []
+
 class CovHandler(ParrentHandler):
     def get(self):
         self.render("static/covetrics.html")
         page = covetrics.PageElementFinder()
         page.GetUrlList(BaseUrl, 2)
         page.FindElements()
-        self.AppElementList = page.TotalElementList
+        AppElementList = page.TotalElementList
 
     def post(self):
         try:
@@ -262,7 +264,7 @@ class CovHandler(ParrentHandler):
         print pageEls.TotalElementList
         response = requests.get(BaseUrl)
 
-        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=self.AppElementList)
+        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=pageEls.TotalElementList, testinfo=tests.ParsedTestList)
 
 
 application = tornado.web.Application([
