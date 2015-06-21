@@ -57,7 +57,7 @@ class TestParser(object):
         host = ''
         for line in f:
             if ('def Test') in line:
-                ParsedTestList.append([line[line.find("def Test"):-2], 0, 0, 0])
+                ParsedTestList.append([line[line.find("def Test"):-2], 0, 0, 1])
                 cur += 1
             if ("driver.get(\"http") in line:
                 host = line[line.find("(\"")+2:line.find("\")")]
@@ -82,7 +82,7 @@ class Comparer(object):
 
     def Compare(self, AppElements, TestsElemets, ParsedTests):
         self.UncoveredElements = list(set(AppElements)-set(TestsElemets))
-
+"""
 a = time.time()
 pageEls = PageElementFinder()
 pageEls.GetUrlList('http://dojki.com/', 2)
@@ -94,7 +94,7 @@ print "elements in tests: 20"
 print "test count 500"
 print "test coverage is: 4.329004329004329 %"
 print "time spent: ", 17.79452204704, " sec"
-"""
+
 print pageEls.TotalElementList
 testEls = TestParser()
 testEls.ParseTests(filename)

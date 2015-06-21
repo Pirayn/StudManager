@@ -238,10 +238,6 @@ AppElementList = []
 class CovHandler(ParrentHandler):
     def get(self):
         self.render("static/covetrics.html")
-        page = covetrics.PageElementFinder()
-        page.GetUrlList(BaseUrl, 2)
-        page.FindElements()
-        AppElementList = page.TotalElementList
 
     def post(self):
         try:
@@ -250,21 +246,24 @@ class CovHandler(ParrentHandler):
         except:
             filename = "/Users/artem/Desktop/StudManager/tests/frontTests.py"
         BaseUrl = self.get_argument("BaseUrl")
-        BaseUrl = "http://artdyachkov.fvds.ru:8080/"
         tests = covetrics.TestParser()
         tests.ParseTests(filename)
         pageEls = covetrics.PageElementFinder()
-        print "ok"
-        pageEls.GetUrlList(BaseUrl, 1)
-        print pageEls.UrlList[0]
-        response = urllib2.Request(pageEls.UrlList[0])
-        print response.headers
+        pageEls.GetUrlList(BaseUrl, 2)
         pageEls.FindElements()
-        print "ok2"
-        print pageEls.TotalElementList
-        response = requests.get(BaseUrl)
-
-        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=pageEls.TotalElementList, testinfo=tests.ParsedTestList)
+        AvgInfo = [0, 1, 1, 1, 1]
+        temp =[]
+        for val in tests.ParsedTestList:
+            AvgInfo[0] += float(val[1])
+            AvgInfo[1] += float(val[2])
+            AvgInfo[2] += float(val[3])
+            temp += val[4:]
+        AvgInfo = map(lambda x: float(x/len(tests.ParsedTestList)), AvgInfo)
+        AvgInfo[4] = len(tests.ParsedTestList)
+        AvgInfo[3] = len(set(temp))
+        print set(temp)
+        self.render('static/covrep.html', BaseUrl=tests.TotalElemetList, filename=pageEls.TotalElementList,
+                                          AvgInfo=AvgInfo, testinfo=tests.ParsedTestList)
 
 
 application = tornado.web.Application([

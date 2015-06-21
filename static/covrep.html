@@ -7,17 +7,64 @@
     </title>
 
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <style>
+        table {
+border-spacing: 0;
+empty-cells: hide;
+}
+td {
+padding: 10px 20px;
+text-align: center;
+border-bottom: 1px solid #F4EEE8;
+transition: all 0.5s linear;
+}
+td:first-child {
+text-align: left;
+color: #3D3511;
+font-weight: bold;
+}
+th {
+padding: 10px 20px;
+color: #3D3511;
+    font-size: larger;
+border-bottom: 3px solid #000000;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+td:nth-child(even) {
+background: #98ff98;
+}
+td:nth-child(odd) {
+background: #98ff98;
+}
+th:nth-child(even)  {
+background: #98ff98;
+}
+th:nth-child(odd)  {
+background: #98ff98;
+}
+.round-top {
+border-top-left-radius: 5px;
+}
+.round-bottom {
+border-bottom-left-radius: 5px;
+}
+tr:hover td{
+background: #D1C7BF;
+font-weight: bold;
+}
+    </style>
 </head>
-<body>
-        <table border="1">
-            <caption>testinfo</caption>
-            <t>
-                <th>TestName</th>
-                <th>Strs</th>
-                <th>Asserts</th>
-                <th>execute count</th>
-                <th>elements</th>
-            </t>
+<body bgcolor="#f5e79e">
+           <h1 align="center">Test information</h1>
+        <table border="1" align="center" class="zebra">
+            <tr>
+                <th>Test name</th>
+                <th>Strings count</th>
+                <th>Asserts count</th>
+                <th>Executes count</th>
+                <th>Elements</th>
+            </tr>
             {% for test in testinfo %}
             <tr>
                 <td>{{ test[0] }}</td>
@@ -27,9 +74,17 @@
                 <td>{{ test[4:] }}</td>
             </tr>
             {% end %}
+            <tr>
+                <th>Total: {{ AvgInfo[4] }}</th>
+                <th>Average: {{ AvgInfo[0] }}</th>
+                <th>Average: {{ AvgInfo[1] }}</th>
+                <th>Average: {{ AvgInfo[2] }}</th>
+                <th>Average: {{ AvgInfo[3] }}</th>
+            </tr>
         </table>
-    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-    <div id="container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+           <div id="cont" style="min-width: 1200px; height: 450px; max-width: 1200px; padding: 5px; align-self: center; align-content: center">
+    <div class="cont" id="container"  style="min-width: 590px; height: 400px; max-width: 590px; margin: 0; padding: 5px; float: left"></div>
+    <div class="cont" id="container2" style="min-width: 590px; height: 400px; max-width: 590px; margin: 0; padding: 5px; float: right"></div></div>
 </body>
 <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
 <script>
